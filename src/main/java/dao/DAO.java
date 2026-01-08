@@ -10,7 +10,7 @@ import java.util.List;
 public class DAO<T> {
 
     private static EntityManagerFactory emf;
-    private EntityManager em;
+    protected EntityManager em;
     private Class<T> clazz;
 
     static{
