@@ -1,24 +1,16 @@
 package transactions.user;
 
+import dao.UserDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import model.User;
 
 public class NewUser {
-
     public static void main(String[] args) {
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa_exercises");
-        EntityManager em = emf.createEntityManager();
-
+        UserDAO dao = new UserDAO();
         User user = new User("Nicole", "nicoleoliveira@outlook.com");
-
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
-
-        em.close();
-        emf.close();
+        dao.includeFull(user);
+        dao.printUser(user);
     }
 }

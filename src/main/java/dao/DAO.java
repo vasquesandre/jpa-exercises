@@ -61,6 +61,24 @@ public class DAO<T> {
         return query.getResultList();
     }
 
+    public T findById(Object id) {
+        return em.find(clazz, id);
+    }
+
+    protected T merge(T entity) {
+        em.getTransaction().begin();
+        T merged = em.merge(entity);
+        em.getTransaction().commit();
+        em.close();
+        return merged;
+    }
+
+    protected void delete(T entity) {
+        em.getTransaction().begin();
+        em.remove(entity);
+        em.getTransaction().commit();
+    }
+
     public void close() {
         em.close();
     }

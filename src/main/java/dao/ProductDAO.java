@@ -12,12 +12,8 @@ public class ProductDAO extends DAO<Product> {
     }
 
     public Product updateProductValueById(int id, double price) {
-        Product product = em.find(Product.class, id);
+        Product product = findById(id);
         product.setPrice(price);
-        em.getTransaction().begin();
-        em.merge(product);
-        em.getTransaction().commit();
-        em.close();
-        return product;
+        return merge(product);
     }
 }
