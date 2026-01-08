@@ -9,20 +9,16 @@ import java.util.List;
 
 public class DAO<T> {
 
-    private static EntityManagerFactory emf;
+    private static final EntityManagerFactory emf;
     protected EntityManager em;
-    private Class<T> clazz;
+    private final Class<T> clazz;
 
     static{
         try {
             emf = Persistence.createEntityManagerFactory("jpa_exercises");
         } catch (Exception e) {
-
+            throw new RuntimeException(e);
         }
-    }
-
-    public DAO() {
-        this(null);
     }
 
     public DAO(Class<T> clazz) {
