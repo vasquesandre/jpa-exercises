@@ -1,15 +1,12 @@
 package dao;
 
-import model.User;
+import domain.User;
+import jakarta.persistence.EntityManager;
 
 public class UserDAO extends DAO<User>{
 
-    public UserDAO() {
-        super(User.class);
-    }
-
-    public void printUser(User user){
-        System.out.println("ID: " + user.getId() + " || Name: " + user.getUsername() + " || Email: " + user.getEmail());
+    public UserDAO(EntityManager em) {
+        super(em, User.class);
     }
 
     public User updateUserEmailById(int id, String email){

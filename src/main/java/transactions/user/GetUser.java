@@ -1,12 +1,7 @@
 package transactions.user;
 
 import dao.UserDAO;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import model.User;
-
-import java.util.List;
+import domain.User;
 
 public class GetUser {
 

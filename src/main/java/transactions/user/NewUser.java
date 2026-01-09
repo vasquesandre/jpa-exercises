@@ -1,10 +1,7 @@
 package transactions.user;
 
 import dao.UserDAO;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import model.User;
+import domain.User;
 
 public class NewUser {
     public static void main(String[] args) {

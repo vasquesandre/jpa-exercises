@@ -1,20 +1,15 @@
 package transactions.product;
 
-import dao.DAO;
 import dao.ProductDAO;
-import model.Product;
+import domain.Product;
+import service.ProductService;
 
 import java.util.List;
 
 public class GetProducts {
     public static void main(String[] args) {
-
-        ProductDAO dao = new ProductDAO();
-        List<Product> products = dao.getAll(10, 0);
-
-        for (Product product : products) {
-            dao.printProduct(product);
-        }
-
+        ProductService productService = new ProductService();
+        List<Product> products = productService.get(10, 0);
+        products.forEach(System.out::println);
     }
 }

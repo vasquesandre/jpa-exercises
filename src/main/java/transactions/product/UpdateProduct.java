@@ -1,13 +1,14 @@
 package transactions.product;
 
 import dao.ProductDAO;
-import model.Product;
+import domain.Product;
+import service.ProductService;
 
 public class UpdateProduct {
 
     public static void main(String[] args) {
-        ProductDAO dao = new ProductDAO();
-        Product product = dao.updateProductValueById(2, 1100.99);
-        dao.printProduct(product);
+        ProductService productService = new ProductService();
+        Product product = productService.updateValueById(2, 999.90);
+        System.out.println(product);
     }
 }

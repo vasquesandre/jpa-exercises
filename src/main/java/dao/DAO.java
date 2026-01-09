@@ -1,81 +1,69 @@
 package dao;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
 public class DAO<T> {
 
-    private static final EntityManagerFactory emf;
     protected EntityManager em;
     private final Class<T> clazz;
 
-    static{
-        try {
-            emf = Persistence.createEntityManagerFactory("jpa_exercises");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public DAO(Class<T> clazz) {
+    public DAO(EntityManager em, Class<T> clazz) {
         this.clazz = clazz;
-        em = emf.createEntityManager();
+        this.em = em;
     }
 
-    public DAO<T> openTransaction() {
-        em.getTransaction().begin();
-        return this;
-    }
-
-    public DAO<T> closeTransaction() {
-        em.getTransaction().commit();
-        return this;
-    }
-
-    public DAO<T> include(T entity) {
+    public void include(T entity) {
         em.persist(entity);
-        return this;
     }
 
-    public DAO<T> includeFull(T entity) {
-        return this.openTransaction().include(entity).closeTransaction();
+    public T merge(T entity) {
+        return em.merge(entity);
     }
 
-    public List<T> getAll(int limit, int offset) {
-        if(clazz == null){
-            throw new UnsupportedOperationException("Class is null");
-        }
-
-        String jpql = "select e from " + clazz.getName() + " e";
-        TypedQuery<T> query = em.createQuery(jpql, clazz);
-        query.setMaxResults(limit).setFirstResult(offset);
-
-        return query.getResultList();
+    public void delete(T entity) {
+        em.remove(entity);
     }
 
     public T findById(Object id) {
         return em.find(clazz, id);
     }
 
-    protected T merge(T entity) {
-        em.getTransaction().begin();
-        T merged = em.merge(entity);
-        em.getTransaction().commit();
-        em.close();
-        return merged;
+    public List<T> getAll(int limit, int offset) {
+        return em.createQuery("from " + clazz.getName(), clazz)
+                .setMaxResults(limit)
+                .setFirstResult(offset)
+                .getResultList();
     }
 
-    protected void delete(T entity) {
-        em.getTransaction().begin();
-        em.remove(entity);
-        em.getTransaction().commit();
-    }
-
-    public void close() {
-        em.close();
-    }
+//    public DAO<T> openTransaction() {
+//        em.getTransaction().begin();
+//        return this;
+//    }
+//
+//    public DAO<T> closeTransaction() {
+//        em.getTransaction().commit();
+//        return this;
+//    }
+//
+//    public DAO<T> includeFull(T entity) {
+//        return this.openTransaction().include(entity).closeTransaction();
+//    }
+//
+//    public List<T> getAll(int limit, int offset) {
+//        if(clazz == null){
+//            throw new UnsupportedOperationException("Class is null");
+//        }
+//
+//        String jpql = "select e from " + clazz.getName() + " e";
+//        TypedQuery<T> query = em.createQuery(jpql, clazz);
+//        query.setMaxResults(limit).setFirstResult(offset);
+//
+//        return query.getResultList();
+//    }
+//
+//    public void close() {
+//        em.close();
+//    }
 }

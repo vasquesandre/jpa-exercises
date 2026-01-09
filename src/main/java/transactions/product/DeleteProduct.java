@@ -1,13 +1,10 @@
 package transactions.product;
 
-import dao.ProductDAO;
-import domain.Product;
 import service.ProductService;
 
-public class NewProduct {
+public class DeleteProduct {
     public static void main(String[] args) {
-        Product product = new Product("iPhone", 1100.99);
         ProductService productService = new ProductService();
-        productService.create(product);
+        productService.delete(2);
     }
 }
