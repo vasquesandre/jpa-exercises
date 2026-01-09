@@ -2,12 +2,12 @@ package transactions.user;
 
 import dao.UserDAO;
 import domain.User;
+import service.UserService;
 
 public class NewUser {
     public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
+        UserService userService = new UserService();
         User user = new User("Nicole", "nicoleoliveira@outlook.com");
-        dao.includeFull(user);
-        dao.printUser(user);
+        userService.create(user);
     }
 }

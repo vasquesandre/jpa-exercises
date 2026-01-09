@@ -37,7 +37,7 @@ public class ProductService {
         }
     }
 
-    public Product updateValueById(int id, double price) {
+    public Product updatePriceById(int id, double price) {
         EntityManager em = JPAUtil.getEntityManager();
 
         try {

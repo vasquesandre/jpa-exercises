@@ -1,10 +1,11 @@
 package transactions.user;
 
 import dao.UserDAO;
+import service.UserService;
 
 public class DeleteUser {
     public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-        dao.deleteUserById(2);
+        UserService userService = new UserService();
+        userService.delete(4);
     }
 }
