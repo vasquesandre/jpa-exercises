@@ -30,7 +30,7 @@ public class UserService {
         }
     }
 
-    public void create(User user) {
+    public User create(User user) {
         EntityManager em = JPAUtil.getEntityManager();
 
         try {
@@ -38,6 +38,7 @@ public class UserService {
             UserDAO dao = new UserDAO(em);
             dao.include(user);
             em.getTransaction().commit();
+            return dao.findById(user.getId());
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw e;

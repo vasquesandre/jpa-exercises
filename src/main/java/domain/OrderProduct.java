@@ -60,4 +60,14 @@ public class OrderProduct {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "OrderProduct{" +
+                "id=" + id +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
+    }
 }

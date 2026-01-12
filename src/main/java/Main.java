@@ -16,13 +16,16 @@ public class Main {
         UserService userService = new UserService();
         ProductService productService = new ProductService();
 
-        User user = userService.get(5);
+//        List<Order> order = orderService.get(10,0);
+//        order.forEach(System.out::println);
 
-        Order order = orderService.create(user.getId());
+        Order order = orderService.get(15L);
+        System.out.println(order);
 
-        Product product = productService.get(3);
 
-        orderService.addItem(order.getId(), product.getId(), 1);
+
+
+
 
     }
 }

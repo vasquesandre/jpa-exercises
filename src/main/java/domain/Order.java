@@ -15,7 +15,7 @@ public class Order {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderProduct> items;
 
     public Order() {
@@ -48,5 +48,14 @@ public class Order {
 
     public void setItems(List<OrderProduct> items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", user=" + user +
+                ", items=" + items +
+                '}';
     }
 }

@@ -5,6 +5,7 @@ import dao.ProductDAO;
 import domain.Product;
 import infra.JPAUtil;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
@@ -31,14 +32,14 @@ public class ProductService {
         }
     }
 
-    public void create(Product product) {
+    public Product create(Product product) {
         EntityManager em = JPAUtil.getEntityManager();
-
         try {
             em.getTransaction().begin();
             ProductDAO dao = new ProductDAO(em);
             dao.include(product);
             em.getTransaction().commit();
+            return dao.findById(product.getId());
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw e;
@@ -70,9 +71,20 @@ public class ProductService {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
+
+            List<?> orderProducts = em.createQuery(
+                    "select op from OrderProduct op where op.product.id = :id")
+                    .setParameter("id", id)
+                    .getResultList();
+
+            if (!orderProducts.isEmpty()) {
+                throw new IllegalStateException("Product is already used in an order");
+            }
+
             ProductDAO dao = new ProductDAO(em);
             Product product = dao.findById(id);
             dao.delete(product);
+
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
