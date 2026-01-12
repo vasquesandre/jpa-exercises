@@ -20,6 +20,16 @@ public class UserService {
         }
     }
 
+    public User get(int id) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            UserDAO dao = new UserDAO(em);
+            return dao.findById(id);
+        } finally {
+            em.close();
+        }
+    }
+
     public void create(User user) {
         EntityManager em = JPAUtil.getEntityManager();
 

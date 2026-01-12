@@ -21,6 +21,16 @@ public class ProductService {
         }
     }
 
+    public Product get(int id) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            ProductDAO dao = new ProductDAO(em);
+            return dao.findById(id);
+        } finally {
+            em.close();
+        }
+    }
+
     public void create(Product product) {
         EntityManager em = JPAUtil.getEntityManager();
 

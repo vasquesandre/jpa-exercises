@@ -6,7 +6,7 @@ import service.ProductService;
 
 public class NewProduct {
     public static void main(String[] args) {
-        Product product = new Product("iPhone", 1100.99);
+        Product product = new Product("PS5", 759.49);
         ProductService productService = new ProductService();
         productService.create(product);
     }
