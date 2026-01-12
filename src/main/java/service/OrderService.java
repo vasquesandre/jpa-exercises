@@ -76,6 +76,12 @@ public class OrderService {
             Order order = em.find(Order.class, orderId);
             Product product = em.find(Product.class, productId);
 
+            if(order == null){
+                throw new IllegalArgumentException("Order does not exist");
+            } else if(product == null){
+                throw new IllegalArgumentException("Product does not exist");
+            }
+
             OrderProduct existingItem = null;
 
             for (OrderProduct item : order.getItems()) {
