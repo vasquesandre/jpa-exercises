@@ -5,7 +5,6 @@ import dao.ProductDAO;
 import domain.Product;
 import infra.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class ProductService {
         }
     }
 
-    public Product get(int id) {
+    public Product get(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             ProductDAO dao = new ProductDAO(em);
@@ -48,7 +47,7 @@ public class ProductService {
         }
     }
 
-    public Product updatePriceById(int id, double price) {
+    public Product updatePriceById(Long id, double price) {
         EntityManager em = JPAUtil.getEntityManager();
 
         try {
@@ -67,7 +66,7 @@ public class ProductService {
         }
     }
 
-    public void delete(int id) {
+    public void delete(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
