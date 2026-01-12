@@ -20,7 +20,7 @@ public class UserService {
         }
     }
 
-    public User get(int id) {
+    public User get(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             UserDAO dao = new UserDAO(em);
@@ -47,7 +47,7 @@ public class UserService {
         }
     }
 
-    public User updateEmailById(int id, String email) {
+    public User updateEmailById(Long id, String email) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
@@ -65,7 +65,7 @@ public class UserService {
         }
     }
 
-    public void delete(int id) {
+    public void delete(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
