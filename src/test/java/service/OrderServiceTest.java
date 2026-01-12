@@ -4,6 +4,8 @@ import domain.Order;
 import domain.OrderProduct;
 import domain.Product;
 import domain.User;
+import infra.DatabaseCleaner;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -123,6 +125,11 @@ class OrderServiceTest {
 
         Order updatedOrder = orderService.get(order.getId());
         assertTrue(updatedOrder.getItems().isEmpty());
+    }
+
+    @AfterEach
+    void cleanDatabase() {
+        DatabaseCleaner.clean();
     }
 
 }

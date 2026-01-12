@@ -3,6 +3,8 @@ package service;
 import domain.Order;
 import domain.Product;
 import domain.User;
+import infra.DatabaseCleaner;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -98,6 +100,11 @@ class ProductServiceTest {
 
         Product deleted = productService.get(product.getId());
         assertNull(deleted);
+    }
+
+    @AfterEach
+    void cleanDatabase() {
+        DatabaseCleaner.clean();
     }
 
 }

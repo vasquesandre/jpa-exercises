@@ -1,6 +1,8 @@
 package service;
 
 import domain.User;
+import infra.DatabaseCleaner;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -97,5 +99,9 @@ class UserServiceTest {
         );
     }
 
+    @AfterEach
+    void cleanDatabase() {
+        DatabaseCleaner.clean();
+    }
 
 }
