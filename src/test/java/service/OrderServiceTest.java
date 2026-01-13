@@ -47,7 +47,7 @@ class OrderServiceTest {
 
         assertEquals(1, persistedOrder.getItems().size());
 
-        OrderProduct item = persistedOrder.getItems().get(0);
+        OrderProduct item = persistedOrder.getItems().getFirst();
         assertEquals(2, item.getQuantity());
         assertEquals(2201.98, item.getPrice());
     }
@@ -77,7 +77,7 @@ class OrderServiceTest {
         Order persistedOrder = orderService.get(order.getId());
 
         assertEquals(1, persistedOrder.getItems().size());
-        assertEquals(3, persistedOrder.getItems().get(0).getQuantity());
+        assertEquals(3, persistedOrder.getItems().getFirst().getQuantity());
     }
 
     @Test
@@ -119,7 +119,7 @@ class OrderServiceTest {
         orderService.addItem(order.getId(), product.getId(), 2);
 
         Order persistedOrder = orderService.get(order.getId());
-        OrderProduct item = persistedOrder.getItems().get(0);
+        OrderProduct item = persistedOrder.getItems().getFirst();
 
         orderService.removeItem(order.getId(), item.getProduct().getId());
 
